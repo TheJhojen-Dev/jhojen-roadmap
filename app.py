@@ -300,14 +300,15 @@ for month in roadmap:
                 with cols[k]:
                     day_id = day['id']
                     is_completed = day_id in st.session_state.completed_days_v2
-                    badge_class = f"badge-{day['type'].lower()}"
+                    day_type = day.get('type', 'Estudio')  # Valor por defecto defensivo
+                    badge_class = f"badge-{day_type.lower()}"
                     
                     with st.container():
                         st.markdown(f"""
                         <div style="border: 1px solid {'#10b981' if is_completed else card_border}; background-color: {'rgba(16, 185, 129, 0.05)' if is_completed else card_bg}; padding: 1rem; border-radius: 1rem; height: 100%;">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
                                 <span class="secondary-text" style="font-size: 0.7rem; font-weight: bold;">{day['dayName']} - <span class="mono">{day['date']}</span></span>
-                                <span class="badge {badge_class}">{day['type']}</span>
+                                <span class="badge {badge_class}">{day_type}</span>
                             </div>
                             <h4 style="font-size: 0.9rem; font-weight: 800; color: {text_color}; margin-bottom: 0.5rem;">{day['title']}</h4>
                             <p class="secondary-text" style="font-size: 0.75rem; margin-bottom: 1rem; line-height: 1.4;">{day['desc']}</p>
