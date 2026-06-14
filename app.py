@@ -128,6 +128,32 @@ if 'completed_days_v2' not in st.session_state:
 # --- BITÁCORA EN SIDEBAR ---
 with st.sidebar:
     st.divider()
+    st.subheader("💾 Gestión de Datos")
+    
+    # Botón para descargar progreso
+    progress_json = json.dumps(st.session_state.completed_days_v2, indent=4)
+    st.download_button(
+        label="📥 Descargar Respaldo",
+        data=progress_json,
+        file_name=f"roadmap_backup_{datetime.now().strftime('%Y%m%d')}.json",
+        mime="application/json",
+        help="Guarda tu progreso en un archivo en tu PC."
+    )
+    
+    # Botón para cargar progreso
+    uploaded_file = st.file_uploader("📤 Cargar Respaldo", type="json", help="Sube tu archivo de respaldo para recuperar tu progreso.")
+    if uploaded_file is not None:
+        try:
+            restored_data = json.load(uploaded_file)
+            if st.button("Confirmar Restauración"):
+                st.session_state.completed_days_v2 = restored_data
+                save_progress(restored_data)
+                st.success("¡Progreso restaurado con éxito!")
+                st.rerun()
+        except Exception as e:
+            st.error(f"Error al cargar el archivo: {e}")
+
+    st.divider()
     st.subheader("📝 Bitácora de Notas")
     notes_count = sum(1 for d in st.session_state.completed_days_v2.values() if d.get("note"))
     if notes_count > 0:
