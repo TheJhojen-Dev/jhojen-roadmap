@@ -1,0 +1,471 @@
+🐧 Fase 1: Fundamentos y Administración Local: 3 - 5 meses
+
+(Estado : En Proceso) 🏗️
+
+1.1 Gestión de Archivos y Navegación (Dominado)✅
+
+Comandos: pwd, cd, ls (flags: -l, -a, -R), mkdir -p, touch, cp, mv, rm, tar.
+
+1.2 Flujos de Datos y Redirecciones (Dominado)✅
+
+Comandos: cat, less, head, tail, wc, grep, echo.
+Operadores: >, >>, |, &&, ||
+
+1.3 Administración de Sistema y Permisos (Dominado)✅
+
+Comandos: chmod, chown, sudo, df -h, du -sh, free -h.
+Búsqueda Avanzada: find (flags: -name, -perm, -mtime, -exec).
+
+1.4 Control de Procesos y Rendimiento (Dominado)✅
+
+Comandos: top, htop, ps aux, kill, jobs, bg, fg, nice, renice.
+
+1.5 Área de Desarrollo y Refinamiento (Dominado)✅
+
+Procesamiento de Texto multiple/avanzado: awk,sed.
+Filtros de Datos: sort, uniq -c (conteo de ocurrencias).
+Automatización: xargs
+
+1.6 Fundamentos de SQL: (En proceso)
+
+Concepto: Lenguaje de consulta estructurado.
+Objetivo: Aprender SELECT, INSERT, UPDATE, JOIN.(Pendiente)⚠️
+
+Actualmente con un curso de 2 horas: SQL desde 0 - HolaMundo
+
+1.7 Formatos de Datos y Acceso Remoto: Dominio de JSON/YAML (Pendiente)⚠️
+
+1.8 Gestión de Paquetes y Repositorios: (Pendiente)⚠️
+
+Administración del ciclo de vida de software, resolución de dependencias y limpieza de caché (apt, dpkg, sources.list, autoremove). 
+
+####################### EN PAUSA ############################
+
+1.9 Control de Versiones: (Pendiente)⚠️
+
+ Implementación de flujos de trabajo profesionales (git init, git clone, git commit).
+
+1.10 Python para SysAdmins (El salto de Bash a Python): (Pendiente)⚠️
+
+Concepto: Usar Python para tareas que Bash hace difícil (manejo de errores complejo, APIs).
+
+Herramientas: Librería os, subprocess, sys.
+
+Objetivo: Crear un script que limpie logs de más de 30 días pero que guarde un reporte en JSON.
+
+1.11 Automatización y Scripting:
+(Pendiente)⚠️
+
+Creación de scripts en Bash y bucles para tareas tediosas (sh, chmod +x, for/while loops). 
+
+1.12 Automatización de Documentación (Pandas/Openpyxl): (En Proceso) ⚙️
+
+Concepto: Convertir la salida de comandos de sistema en reportes ejecutivos.
+
+Objetivo: Tomar la salida de du -sh y generar un Excel con gráficos de qué carpetas consumen más espacio en tu antiX. 
+
+
+🌐 Fase 2: Redes y Comunicación (Nivel: Cloud Networking): 1 mes
+ 
+(Estado : Refinamiento) ⚙️
+
+2.1 Direccionamiento Lógico e Interfaces (Dominado)✅
+
+Concepto: Identificación de hosts en redes LAN/WAN y segmentación (IPv4/v6).
+
+Comandos: ip addr, ifconfig, hostname -I, nmcli.
+
+Contenido: Diferencia entre IP pública vs. privada y cálculo de Máscaras de Red (CIDR).
+
+Objetivo: Identificar la IP de tu antiX y entender en qué rango de red operas.
+
+2.2 Protocolos y Puertos de Servicio (Dominado)✅
+
+Concepto: "Puertas" de enlace para servicios específicos y fiabilidad de transporte.
+
+Comandos: ss -tunlp, netstat -tunlp, lsof -i.
+
+Contenido: Protocolos críticos (HTTP/80, HTTPS/443, SSH/22, FTP/21) y diferencia entre TCP (Handshake) vs. UDP (Best-effort).
+
+Objetivo: Identificar servicios activos y entender por qué un servidor es invisible si el puerto está cerrado.
+
+2.3 Resolución de Nombres y DNS (Dominado)✅
+
+Concepto: El "Listín Telefónico" de Internet y traducción de dominios a IPs.
+
+Comandos: dig, nslookup, host, cat /etc/resolv.conf.
+
+Contenido: Jerarquía DNS, archivo /etc/hosts (DNS local) y servidores de nombres (8.8.8.8, 1.1.1.1).
+
+Objetivo: Configurar DNS manual y rastrear dónde se bloquea la resolución de un dominio.
+
+2.4 Diagnóstico y Troubleshooting de Rutas (Dominado)✅
+
+Concepto: Localización de fallos en el salto de paquetes y análisis de latencia.
+
+Comandos: ping, traceroute, mtr, ip route.
+
+Contenido: Salto de paquetes, latencia (ICMP) y detección de cuellos de botella entre el router y el destino.
+
+Objetivo: Diagnosticar exactamente en qué punto de la red se pierde la conexión externa.
+
+2.5 Seguridad Perimetral y Firewalls (Dominado)✅
+
+Concepto: Gestión de reglas de tráfico para proteger servidores expuestos.
+
+Comandos: ufw, iptables, nmap (para escaneo de seguridad).
+
+Contenido: Reglas de entrada (Inbound) y salida (Outbound) para mitigar intrusiones.
+
+Objetivo: Bloquear todo el tráfico de tu sistema excepto los puertos autorizados por ti.
+
+2.6 Interacción con APIs y Servicios Web (Dominado)✅
+
+Concepto: Administración de servicios web y consumo de datos sin interfaz gráfica.
+
+Comandos: curl -I, wget, nc (netcat).
+
+Contenido: Cabeceras HTTP, códigos de estado (200, 404, 500) y verbos (GET, POST, PUT, DELETE).
+
+Objetivo: Verificar el estado de un servidor o descargar recursos directamente desde la terminal.
+
+2.7 Redes en la Nube (VPC Concepts):(Pendiente)⚠️
+
+Concepto: Entender que en AWS no tiras cables, sino que defines rangos CIDR virtuales.
+
+actualmente 2 videos de: 
+VPC para principiantes - My IT Mentors
+AWS Networking Basics For Programmers - Travis media
+
+
+Contenido: Subnetting (Públicas vs Privadas), Gateways y NAT.
+
+Objetivo: Diseñar en papel una red con una subred pública para un servidor web y una privada para una base de datos.
+
+🔑 Fase 3: El Puente (Seguridad y SSH): 3 - 4 semanas 
+
+(En proceso)⚠️
+
+3.1 Identidad Digital (Criptografía de Llaves):
+(Dominado)
+
+Introducción: Las contraseñas son vulnerables a ataques de fuerza bruta. Las llaves criptográficas son virtualmente imposibles de romper.
+
+Contenido: Generación de pares de llaves (Pública/Privada), algoritmos (RSA vs ED25519) y el concepto de la "huella digital" del servidor.
+
+Comandos: ssh-keygen -t ed25519, ssh-copy-id, inspección de ~/.ssh/authorized_keys.
+
+Objetivo: Configurar tu servidor para que prohíba entrar con contraseña y solo permita llaves autorizadas.
+
+3.2 Endurecimiento del Servidor (Hardening SSH)
+(Dominado)
+
+Introducción: El servicio SSH es el más atacado del mundo. Debes aprender a cerrar las ventanas para que nadie entre.
+
+Contenido: Modificación del puerto por defecto, desactivar el login de root, y limitar quién puede conectarse.
+
+Archivo Clave: /etc/ssh/sshd_config.
+
+Objetivo: Editar la configuración de SSH para que un atacante no pueda ni siquiera intentar loguearse como administrador.
+
+3.3 El Guardián (Firewalling con UFW/Iptables)
+(Dominado)
+
+Introducción: Un servidor tiene 65,535 puertos. Solo deberías tener abiertos 2 o 3. El firewall es tu primera línea de defensa.
+
+Contenido: Reglas de "Deny by default" (denegar todo por defecto), abrir puertos específicos (22, 80, 443) y filtrar por IP de origen.
+
+Comandos: ufw enable, ufw allow 22/tcp, ufw status numbered, iptables -L.
+
+Objetivo: Configurar un muro donde solo tu IP personal pueda acceder al puerto SSH, bloqueando al resto del mundo.
+
+3.4 Movimiento de Datos Seguro (SCP y Rsync)
+Introducción: ¿Cómo subes tu código o bajas un backup sin usar memorias USB? Usando el túnel de SSH.
+
+Contenido: Transferencia de archivos simple con scp y sincronización eficiente (solo envía los cambios) con rsync.
+
+Comandos: scp archivo.txt usuario@ip:/ruta/, rsync -avz local/ remoto/.
+
+Objetivo: Sincronizar una carpeta de tu PC local con tu servidor antiX manteniendo los permisos de archivos intactos.
+
+3.5 Gestión de Privilegios (Sudo y Auditoría)
+
+Introducción: En la nube, nunca trabajas como "root" por seguridad. Usas un usuario normal con superpoderes temporales.
+
+Contenido: El archivo /etc/sudoers, grupos de sistema y rastreo de quién hizo qué (last, who).
+
+Comandos: visudo, usermod -aG sudo usuario, tail -f /var/log/auth.log.
+
+Objetivo: Crear un usuario específico para ti, darle permisos de administrador y auditar los logs para ver cuándo se inició sesión.
+
+3.6 AWS IAM (La llave maestra):
+
+Concepto: El firewall no es suficiente; necesitas saber quién puede hacer qué.
+
+Contenido: Users, Groups, Roles y Políticas (JSON).
+
+Objetivo: Crear un usuario en la consola de AWS (capa gratuita) que solo pueda ver archivos en S3 pero no borrarlos.
+
+3.7 AWS RDS (Bases de Datos Relacionales):
+
+Concepto: Dejar que Amazon administre el motor (MySQL/PostgreSQL).
+
+Objetivo: Crear una instancia de base de datos y conectarla a tu script de Python.
+
+3.8 NoSQL (DynamoDB):
+
+Concepto: Bases de datos ultra rápidas para apps modernas.
+
+Objetivo: Guardar un JSON simple de un usuario en una tabla de DynamoDB usando Python.
+
+3.9 Zero Trust & Cloud Security:
+
+Antes de saltar a Docker, estudia el concepto de "Nunca confiar, siempre verificar". No necesitas herramientas caras; se trata de aplicar políticas de mínimo privilegio en tu configuración de SSH y AWS IAM
+
+📦 Fase 4: La Unidad de Carga (Docker): 2 - 3 meses
+
+4.1 Arquitectura: El Fin de las Máquinas Virtuales
+
+Introducción: Entender por qué un contenedor no es una PC completa. Aprenderás cómo Docker usa el Kernel de Linux para aislar procesos.
+
+Conceptos Clave: Namespaces (aislamiento), Cgroups (limitación de RAM/CPU), Docker Engine.
+
+Comandos: docker version, docker info, docker system df.
+
+Objetivo: Comprender la diferencia técnica entre una VM pesada y un contenedor ligero que arranca en segundos.
+
+4.2 Manipulación de Objetos (Imágenes y Contenedores)
+Introducción: Aprender la diferencia entre el "molde" (Imagen) y el "producto" (Contenedor).
+
+Conceptos Clave: Pulling de Docker Hub, capas de lectura/escritura, estados del contenedor (Running, Stopped, Exited).
+
+Comandos: docker pull, docker run -d, docker ps -a, docker stop, docker rm.
+
+Objetivo: Descargar un servidor web (Nginx), correrlo en segundo plano y aprender a limpiar los recursos cuando termines.
+
+4.3 Persistencia y Redes (Volúmenes y Mapping)
+Introducción: Los contenedores son "olvidadizos" (efímeros). Si el contenedor muere, los datos mueren. Aquí aprendes a conectarlos al mundo real.
+
+Conceptos Clave: Mapeo de puertos (-p host:container), volúmenes (-v), redes virtuales de Docker.
+
+Comandos: docker run -p 8080:80, docker volume ls, docker network inspect.
+
+Objetivo: Correr una base de datos donde la información se guarde en tu disco duro real, no dentro del contenedor.
+
+4.4 El Arte del Dockerfile (Construcción)
+Introducción: Aquí usas tus conocimientos de la Fase 1. Escribirás las instrucciones para crear tu propia imagen personalizada.
+
+Conceptos Clave: Directivas FROM, RUN, COPY, ENV, EXPOSE y CMD. Capas (Layers) y caché.
+
+Comandos: docker build -t mi-app:v1 ., docker images.
+
+Objetivo: Crear un Dockerfile que tome un script de Bash o Python que hiciste en la Fase 1.7 y lo convierta en una imagen lista para la nube.
+
+4.5 Multicontenedores (Docker Compose)
+Introducción: En la vida real, una app necesita una DB, un Cache y un Backend. No vas a levantar uno por uno a mano.
+
+Conceptos Clave: Orquestación básica, archivos docker-compose.yml, dependencias entre servicios.
+
+Comandos: docker-compose up -d, docker-compose ps, docker-compose down.
+
+Objetivo: Levantar una aplicación web completa (WordPress + MySQL, por ejemplo) con un solo comando.
+
+4.6 Mantenimiento e Inspección
+Introducción: Cuando algo falla dentro del contenedor, necesitas "entrar" a ver qué pasa.
+
+Conceptos Clave: Logs de aplicaciones, ejecución de comandos en vivo.
+
+Comandos: docker logs -f, docker exec -it [nombre] bash, docker inspect.
+
+Objetivo: Entrar a un contenedor en ejecución para modificar un archivo o revisar un proceso usando los comandos de la Fase 1.
+
+4.7 Registro de Imágenes (AWS ECR):
+
+Concepto: ¿Dónde guardas tus contenedores para que AWS los use?
+
+Objetivo: Hacer docker push de tu imagen personalizada a Amazon Elastic Container Registry.
+
+🏗️ Fase 5: El Arquitecto (Terraform / IaC): 1.5 meses
+
+5.0 Concepto de "Minimo Privilegio"
+
+-Por qué: Un error común es usar la cuenta "Root" de AWS para todo. Un Junior que sabe crear un usuario con permisos limitados destaca de inmediato.
+
+5.1 El Cambio de Mentalidad: Declarativo vs Imperativo
+Introducción: En Bash (Fase 1.7) das órdenes paso a paso. En Terraform, solo describes el resultado final deseado y la herramienta decide cómo llegar ahí.
+
+Conceptos Clave: Infraestructura Inmutable, Idempotencia (ejecutar 10 veces el código da el mismo resultado) y el concepto de "Infraestructura como Código".
+
+Objetivo: Entender por qué es mejor tener un archivo .tf que un manual de instrucciones de 20 páginas.
+
+5.2 Sintaxis HCL y Proveedores (Providers)
+Introducción: Aprender el lenguaje de HashiCorp (HCL). Es como leer un archivo de configuración, pero con superpoderes.
+
+Conceptos Clave: Bloques de provider (conectar con AWS/Azure/GCP), resource (crear algo) y data (leer algo existente).
+
+Comandos: terraform init (descarga los plugins necesarios).
+
+Objetivo: Configurar tu primer proveedor de nube y autenticarte desde tu terminal de antiX.
+
+5.3 El Ciclo de Vida del Recurso (Plan & Apply)
+Introducción: Terraform te permite predecir el futuro antes de gastar dinero en la nube.
+
+Conceptos Clave: El comando plan (la simulación) y el apply (la ejecución real).
+
+Comandos: terraform plan, terraform apply.
+
+Objetivo: Desplegar tu primer recurso (por ejemplo, una instancia de servidor minimalista) y ver cómo aparece mágicamente en tu consola de AWS o Google Cloud.
+
+5.4 El "Cerebro": El State File (.tfstate)
+Introducción: Terraform necesita recordar qué creó. Si borras este archivo a mano, pierdes el control de tu infraestructura.
+
+Conceptos Clave: El archivo de estado local, el concepto de "Drift" (cuando alguien cambia algo manualmente en la nube y el código no lo sabe).
+
+Comandos: terraform show, terraform state list.
+
+Objetivo: Entender la importancia de proteger el archivo de estado y por qué nunca debes editarlo manualmente.
+
+5.5 Variables, Outputs y Dinamismo
+Introducción: No vas a escribir el nombre de tu servidor a fuego en el código. Vas a usar variables para que tu código sea reutilizable.
+
+Conceptos Clave: variables.tf, outputs.tf (para extraer datos como la IP pública generada) y tipos de datos (strings, listas, mapas).
+
+Objetivo: Crear un script que te pida el nombre del servidor al ejecutarlo y que al terminar te imprima la IP para conectarte por SSH.
+
+5.6 Módulos y Organización
+Introducción: No pongas 1,000 líneas en un solo archivo. Aprende a crear "piezas de Lego" reutilizables.
+
+Conceptos Clave: Estructura de carpetas profesional, llamar a módulos desde el código principal.
+
+Objetivo: Crear un módulo de "Red Segura" que puedas reutilizar en diferentes proyectos sin copiar y pegar código.
+
+5.7 Automatización con Boto3 (Python en AWS):
+
+Concepto: Controlar AWS programáticamente sin Terraform (para tareas rápidas).
+
+Objetivo: Escribir un script de Python que apague todas las instancias EC2 que no tengan el tag "Producción" a las 6:00 PM para ahorrar dinero.
+
+5.8: Multi-Cloud con Terraform: 
+
+Después de dominar AWS, intenta desplegar un recurso pequeño (como un bucket) en Google Cloud (GCP) usando el mismo archivo de Terraform. Esto te quita el miedo al "vendor lock-in".
+
+5.9: FinOps (Optimización de Costos): Ya tienes la alarma de $5 , pero aquí aprenderías a usar herramientas como Infracost para saber cuánto costará tu infraestructura antes de darle a apply
+
+🎼Fase 6: La Orquesta (Kubernetes & CI/CD): 2 - 3 meses
+
+6.1 Anatomía del Clúster (Nodos y Control Plane)
+Introducción: Entender que Kubernetes (K8s) es un conjunto de máquinas trabajando como una sola.
+
+Conceptos Clave: Master Node (el cerebro) vs. Worker Nodes (los músculos). El API Server y el Kubelet.
+
+Comandos: kubectl get nodes, kubectl cluster-info.
+
+Objetivo: Comprender cómo K8s decide en qué máquina física poner a correr tu contenedor basándose en la RAM disponible.
+
+6.2 Los Ladrillos de K8s (Pods, Deployments y ReplicaSets)
+Introducción: En K8s no corres contenedores sueltos, corres Pods.
+
+Conceptos Clave: El Pod como unidad mínima, el Deployment como declaración de cuántas copias quieres, y el Self-healing (si un pod muere, K8s crea otro automáticamente).
+
+Comandos: kubectl get pods, kubectl apply -f deployment.yaml, kubectl delete pod.
+
+Objetivo: Desplegar una aplicación y "matar" un proceso a propósito para ver cómo Kubernetes lo resucita en segundos.
+
+6.3 Comunicación y Exposición (Services e Ingress)
+Introducción: Los Pods tienen IPs efímeras que cambian. Los Services les dan una IP fija para que el mundo los encuentre.
+
+Conceptos Clave: ClusterIP (interno), NodePort y el Ingress (el recepcionista que decide qué URL va a qué servicio).
+
+Comandos: kubectl get svc, kubectl describe ingress.
+
+Objetivo: Hacer que tu aplicación sea accesible desde internet a través de un nombre de dominio, usando un balanceador de carga.
+
+6.4 Gestión de Paquetes con Helm
+Introducción: Instalar aplicaciones complejas en K8s con archivos YAML puros es tedioso. Helm es el "apt-get" de Kubernetes.
+
+Conceptos Clave: Charts, Repositorios, Values.yaml (personalización).
+
+Comandos: helm install, helm list, helm upgrade.
+
+Objetivo: Instalar una base de datos o un servidor de monitoreo completo en tu clúster usando un solo comando de Helm.
+
+6.5 El Flujo Continuo (CI/CD con GitHub Actions)
+Introducción: Un ingeniero nunca sube archivos a mano al servidor. El código fluye solo desde Git hasta Producción.
+
+Conceptos Clave: Integración Continua (CI: tests y build) y Despliegue Continuo (CD: subir a K8s). Pipelines y Workflows.
+
+Herramientas: Archivos .github/workflows/main.yml.
+
+Objetivo: Configurar que, al hacer un git push en tu terminal de antiX, se dispare automáticamente un proceso que cree la imagen de Docker y la actualice en tu clúster.
+
+6.6 GitOps y Configuración (ConfigMaps y Secrets)
+Introducción: Nunca pongas contraseñas en tu código. K8s tiene lugares seguros para guardar esta información.
+
+Conceptos Clave: Separar el código de la configuración. Uso de ConfigMaps para variables y Secrets para llaves privadas.
+
+Comandos: kubectl create secret, kubectl get configmap.
+
+Objetivo: Cambiar el comportamiento de tu app (como el color del fondo o la conexión a la DB) sin tener que reconstruir la imagen de Docker, solo actualizando el ConfigMap.
+
+6.7 Serverless (AWS Lambda):
+
+Concepto: El futuro de la nube. Código que corre sin servidores.
+
+Objetivo: Crear una función Lambda en Python que se active cada vez que subas una imagen a un bucket de S3 y le cambie el tamaño.
+
+6.8: Introducción a MLOps: No necesitas ser científico de datos. Solo aprende cómo se empaqueta un modelo de IA (como un script de Python que predice algo simple) dentro de un contenedor de Docker y cómo se despliega en Kubernetes
+
+👁️ Fase 7: Los Ojos (Observabilidad): 3 meses
+
+7.1 Los Tres Pilares: Métricas, Logs y Trazas
+Introducción: No es solo "mirar si está encendido". Debes entender la diferencia entre saber qué pasó (Logs), cuánto está pasando (Métricas) y dónde está el cuello de botella (Trazas).
+
+Conceptos Clave: Series temporales, eventos discretos y flujo de solicitudes.
+
+Objetivo: Diferenciar cuándo necesitas revisar un archivo de texto (/var/log) y cuándo necesitas una gráfica de consumo.
+
+7.2 Recolección de Métricas con Prometheus
+Introducción: Prometheus es el estándar que "raspa" (scrapes) datos de tus servidores y contenedores.
+
+Conceptos Clave: Exporters (pequeños agentes que extraen datos de Linux o DBs), consultas en PromQL y retención de datos.
+
+Comandos y Herramientas: node_exporter, prometheus.yml.
+
+Objetivo: Instalar un agente en tu antiX que exponga cuánta RAM y CPU estás usando en tiempo real para que Prometheus lo guarde.
+
+7.3 Visualización con Grafana
+Introducción: Los datos crudos no sirven de mucho. Grafana los convierte en tableros (dashboards) hermosos y fáciles de entender.
+
+Conceptos Clave: Data Sources, Paneles, Variables en Dashboards.
+
+Objetivo: Crear un panel visual donde veas la salud de todos tus contenedores de la Fase 4 en una sola pantalla.
+
+7.4 Gestión de Logs Centralizada (Loki / ELK)
+Introducción: Si tienes 50 servidores, no puedes entrar uno por uno con tail -f. Necesitas que todos los logs viajen a un solo lugar.
+
+Conceptos Clave: Agregación de logs, indexación y búsqueda por etiquetas (labels).
+
+Herramientas: Loki (más ligero, estilo Prometheus) o Elasticsearch/Logstash/Kibana (ELK - más pesado y potente).
+
+Objetivo: Buscar en un solo buscador "Error 500" y que te diga exactamente en qué contenedor y a qué hora ocurrió.
+
+7.5 Alertas y Notificaciones (Alertmanager)
+Introducción: No vas a estar mirando Grafana 24/7. El sistema debe gritarte cuando algo va mal.
+
+Conceptos Clave: Umbrales de alerta (Thresholds), Fatiga de alertas (no enviar avisos por tonterías) y canales de notificación (Slack, Telegram, Email).
+
+Objetivo: Configurar una regla que te envíe un mensaje al móvil si el disco duro de tu servidor supera el 90% de capacidad.
+
+7.6 SRE y el Triángulo de Oro
+Introducción: Aprender qué métricas importan realmente: Latencia, Tráfico, Errores y Saturación.
+
+Conceptos Clave: SLAs (Acuerdos de nivel de servicio) y SLIs (Indicadores).
+
+Objetivo: Definir qué significa "que la app funcione bien" en términos numéricos.
+
+7.7 AWS CloudWatch:
+
+Concepto: El panel de control nativo de Amazon.
+
+Objetivo: Configurar una alarma que te envíe un correo si tu factura de AWS supera los $5.
+
