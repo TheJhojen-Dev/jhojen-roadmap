@@ -170,11 +170,29 @@ with st.sidebar:
     else:
         st.info("No hay notas registradas aún.")
 
-    if st.button("Reiniciar Progreso"):
-        if st.sidebar.checkbox("Confirmar reinicio total"):
-            st.session_state.completed_days_v2 = {}
-            save_progress({})
+    # --- BOTÓN DE REINICIO CON CONFIRMACIÓN ---
+    st.divider()
+    if 'confirm_reset' not in st.session_state:
+        st.session_state.confirm_reset = False
+
+    if not st.session_state.confirm_reset:
+        if st.button("🗑️ Reiniciar Todo el Progreso", help="Borra todas las tareas marcadas y tus notas."):
+            st.session_state.confirm_reset = True
             st.rerun()
+    else:
+        st.warning("⚠️ ¿Estás seguro? Se borrarán todas tus notas y progreso.")
+        col_res1, col_res2 = st.columns(2)
+        with col_res1:
+            if st.button("✅ SÍ, BORRAR", use_container_width=True):
+                st.session_state.completed_days_v2 = {}
+                save_progress({})
+                st.session_state.confirm_reset = False
+                st.success("¡Progreso borrado!")
+                st.rerun()
+        with col_res2:
+            if st.button("❌ CANCELAR", use_container_width=True):
+                st.session_state.confirm_reset = False
+                st.rerun()
 
 # --- HEADER ---
 col1, col2 = st.columns([1, 4])
