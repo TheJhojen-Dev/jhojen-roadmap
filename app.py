@@ -222,6 +222,29 @@ for month in roadmap:
                             save_progress(st.session_state.completed_days)
                             st.rerun()
 
+st.markdown(f"""
+<div style="margin-top: 4rem; border-top: 1px solid {divider_color}; padding-top: 2rem; text-align: center; color: {secondary_text}; font-size: 0.7rem;">
+    <p>Jhojen DevOps Cloud Planner v2.0 (Streamlit Edition)</p>
+    <p>"El contador de sexto año ha iniciado. Prepárate hoy para liderar mañana."</p>
+</div>
+""", unsafe_allow_html=True)
+ mañana."</p>
+</div>
+""", unsafe_allow_html=True)
+ml=True)
+                    
+                    # El checkbox de Streamlit para controlar el estado
+                    if st.checkbox("Completado", value=is_completed, key=day['id']):
+                        if day['id'] not in st.session_state.completed_days:
+                            st.session_state.completed_days.append(day['id'])
+                            save_progress(st.session_state.completed_days)
+                            st.rerun()
+                    else:
+                        if day['id'] in st.session_state.completed_days:
+                            st.session_state.completed_days.remove(day['id'])
+                            save_progress(st.session_state.completed_days)
+                            st.rerun()
+
 st.markdown("""
 <div style="margin-top: 4rem; border-top: 1px solid #1e293b; padding-top: 2rem; text-align: center; color: #64748b; font-size: 0.7rem;">
     <p>Jhojen DevOps Cloud Planner v2.0 (Streamlit Edition)</p>
