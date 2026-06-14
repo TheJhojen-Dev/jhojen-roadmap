@@ -1,6 +1,7 @@
 import streamlit as st
 import json
 import os
+from datetime import datetime
 
 # Configuración de página
 st.set_page_config(
@@ -108,17 +109,46 @@ def load_roadmap():
 def load_progress():
     if os.path.exists(PROGRESS_PATH):
         with open(PROGRESS_PATH, "r") as f:
-            return json.load(f)
-    return []
+            data = json.load(f)
+            # Soporte para formato antiguo (solo lista de IDs)
+            if isinstance(data, list):
+                return {day_id: {"note": "", "date": ""} for day_id in data}
+            return data
+    return {}
 
-def save_progress(completed_ids):
+def save_progress(progress_dict):
     with open(PROGRESS_PATH, "w") as f:
-        json.dump(completed_ids, f)
+        json.dump(progress_dict, f, indent=4)
 
 # Inicializar estado
 roadmap = load_roadmap()
-if 'completed_days' not in st.session_state:
-    st.session_state.completed_days = load_progress()
+if 'completed_days_v2' not in st.session_state:
+    st.session_state.completed_days_v2 = load_progress()
+
+# --- BITÁCORA EN SIDEBAR ---
+with st.sidebar:
+    st.divider()
+    st.subheader("📝 Bitácora de Notas")
+    notes_count = sum(1 for d in st.session_state.completed_days_v2.values() if d.get("note"))
+    if notes_count > 0:
+        if st.checkbox("Ver mis notas"):
+            for day_id, info in st.session_state.completed_days_v2.items():
+                if info.get("note"):
+                    st.markdown(f"""
+                    <div style="background: {card_bg}; padding: 10px; border-radius: 8px; border-left: 3px solid #3b82f6; margin-bottom: 10px;">
+                        <p style="font-size: 0.7rem; font-weight: bold; margin: 0;">ID: {day_id}</p>
+                        <p style="font-size: 0.8rem; margin: 5px 0;">{info['note']}</p>
+                        <p style="font-size: 0.6rem; color: {secondary_text}; margin: 0;">{info.get('date', '')}</p>
+                    </div>
+                    """, unsafe_allow_html=True)
+    else:
+        st.info("No hay notas registradas aún.")
+
+    if st.button("Reiniciar Progreso"):
+        if st.sidebar.checkbox("Confirmar reinicio total"):
+            st.session_state.completed_days_v2 = {}
+            save_progress({})
+            st.rerun()
 
 # --- HEADER ---
 col1, col2 = st.columns([1, 4])
@@ -142,7 +172,7 @@ st.divider()
 
 # --- DASHBOARD STATS ---
 total_days = sum(len(w['days']) for m in roadmap for w in m['weeks'])
-completed_count = len(st.session_state.completed_days)
+completed_count = len(st.session_state.completed_days_v2)
 progress_percent = int((completed_count / total_days) * 100) if total_days > 0 else 0
 
 stat_col1, stat_col2, stat_col3 = st.columns(3)
@@ -196,15 +226,8 @@ with stat_col3:
 month_filter = st.sidebar.selectbox("Mes", ["Todos"] + [str(m['monthNum']) for m in roadmap])
 type_filter = st.sidebar.selectbox("Tipo de Tarea", ["Todas", "Estudio", "Proyecto", "Negocio", "Descanso"])
 
-if st.sidebar.button("Reiniciar Progreso"):
-    if st.sidebar.checkbox("Confirmar reinicio"):
-        st.session_state.completed_days = []
-        save_progress([])
-        st.rerun()
-
 # --- TIMELINE ---
 for month in roadmap:
-    # Filtro de mes
     if month_filter != "Todos" and str(month['monthNum']) != month_filter:
         continue
         
@@ -218,7 +241,6 @@ for month in roadmap:
     """, unsafe_allow_html=True)
 
     for week in month['weeks']:
-        # Filtrar días por tipo
         filtered_days = [d for d in week['days'] if type_filter == "Todas" or d['type'] == type_filter]
         
         if not filtered_days:
@@ -226,13 +248,11 @@ for month in roadmap:
             
         st.markdown(f"<h3 style='font-size: 0.8rem; font-weight: bold; color: {text_color}; text-transform: uppercase; margin: 1.5rem 0 1rem 0; background: {card_bg}; border: 1px solid {card_border}; display: inline-block; padding: 4px 12px; border-radius: 8px;'>{week['weekTitle']}</h3>", unsafe_allow_html=True)
         
-        # Grid de días
         cols = st.columns(3)
         for i, day in enumerate(filtered_days):
             with cols[i % 3]:
-                is_completed = day['id'] in st.session_state.completed_days
-                
-                # Clase de badge
+                day_id = day['id']
+                is_completed = day_id in st.session_state.completed_days_v2
                 badge_class = f"badge-{day['type'].lower()}"
                 
                 with st.container():
@@ -247,16 +267,23 @@ for month in roadmap:
                     </div>
                     """, unsafe_allow_html=True)
                     
-                    # El checkbox de Streamlit para controlar el estado
-                    if st.checkbox("Completado", value=is_completed, key=day['id']):
-                        if day['id'] not in st.session_state.completed_days:
-                            st.session_state.completed_days.append(day['id'])
-                            save_progress(st.session_state.completed_days)
-                            st.rerun()
+                    # Logica de completado con Nota
+                    if st.checkbox("Completado", value=is_completed, key=f"check_{day_id}"):
+                        if not is_completed:
+                            # Pop-over de nota
+                            with st.expander("📝 Añadir nota de aprendizaje (opcional)", expanded=True):
+                                note = st.text_area("¿Qué aprendiste hoy?", key=f"note_{day_id}")
+                                if st.button("Guardar Tarea", key=f"btn_{day_id}"):
+                                    st.session_state.completed_days_v2[day_id] = {
+                                        "note": note,
+                                        "date": datetime.now().strftime("%Y-%m-%d %H:%M")
+                                    }
+                                    save_progress(st.session_state.completed_days_v2)
+                                    st.rerun()
                     else:
-                        if day['id'] in st.session_state.completed_days:
-                            st.session_state.completed_days.remove(day['id'])
-                            save_progress(st.session_state.completed_days)
+                        if is_completed:
+                            del st.session_state.completed_days_v2[day_id]
+                            save_progress(st.session_state.completed_days_v2)
                             st.rerun()
 
 st.markdown(f"""
