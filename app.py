@@ -292,43 +292,46 @@ for month in roadmap:
             
         st.markdown(f"<h3 style='font-size: 0.8rem; font-weight: bold; color: {text_color}; text-transform: uppercase; margin: 1.5rem 0 1rem 0; background: {card_bg}; border: 1px solid {card_border}; display: inline-block; padding: 4px 12px; border-radius: 8px;'>{week['weekTitle']}</h3>", unsafe_allow_html=True)
         
-        cols = st.columns(3)
-        for i, day in enumerate(filtered_days):
-            with cols[i % 3]:
-                day_id = day['id']
-                is_completed = day_id in st.session_state.completed_days_v2
-                badge_class = f"badge-{day['type'].lower()}"
-                
-                with st.container():
-                    st.markdown(f"""
-                    <div style="border: 1px solid {'#10b981' if is_completed else card_border}; background-color: {'rgba(16, 185, 129, 0.05)' if is_completed else card_bg}; padding: 1rem; border-radius: 1rem; height: 100%;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                            <span class="secondary-text" style="font-size: 0.7rem; font-weight: bold;">{day['dayName']} - <span class="mono">{day['date']}</span></span>
-                            <span class="badge {badge_class}">{day['type']}</span>
-                        </div>
-                        <h4 style="font-size: 0.9rem; font-weight: 800; color: {text_color}; margin-bottom: 0.5rem;">{day['title']}</h4>
-                        <p class="secondary-text" style="font-size: 0.75rem; margin-bottom: 1rem; line-height: 1.4;">{day['desc']}</p>
-                    </div>
-                    """, unsafe_allow_html=True)
+        # Grid de días (Fila por fila para orden cronológico en móviles)
+        for j in range(0, len(filtered_days), 3):
+            row_days = filtered_days[j:j+3]
+            cols = st.columns(3)
+            for k, day in enumerate(row_days):
+                with cols[k]:
+                    day_id = day['id']
+                    is_completed = day_id in st.session_state.completed_days_v2
+                    badge_class = f"badge-{day['type'].lower()}"
                     
-                    # Logica de completado con Nota
-                    if st.checkbox("Completado", value=is_completed, key=f"check_{day_id}"):
-                        if not is_completed:
-                            # Pop-over de nota
-                            with st.expander("📝 Añadir nota de aprendizaje (opcional)", expanded=True):
-                                note = st.text_area("¿Qué aprendiste hoy?", key=f"note_{day_id}")
-                                if st.button("Guardar Tarea", key=f"btn_{day_id}"):
-                                    st.session_state.completed_days_v2[day_id] = {
-                                        "note": note,
-                                        "date": datetime.now().strftime("%Y-%m-%d %H:%M")
-                                    }
-                                    save_progress(st.session_state.completed_days_v2)
-                                    st.rerun()
-                    else:
-                        if is_completed:
-                            del st.session_state.completed_days_v2[day_id]
-                            save_progress(st.session_state.completed_days_v2)
-                            st.rerun()
+                    with st.container():
+                        st.markdown(f"""
+                        <div style="border: 1px solid {'#10b981' if is_completed else card_border}; background-color: {'rgba(16, 185, 129, 0.05)' if is_completed else card_bg}; padding: 1rem; border-radius: 1rem; height: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <span class="secondary-text" style="font-size: 0.7rem; font-weight: bold;">{day['dayName']} - <span class="mono">{day['date']}</span></span>
+                                <span class="badge {badge_class}">{day['type']}</span>
+                            </div>
+                            <h4 style="font-size: 0.9rem; font-weight: 800; color: {text_color}; margin-bottom: 0.5rem;">{day['title']}</h4>
+                            <p class="secondary-text" style="font-size: 0.75rem; margin-bottom: 1rem; line-height: 1.4;">{day['desc']}</p>
+                        </div>
+                        """, unsafe_allow_html=True)
+                        
+                        # Logica de completado con Nota
+                        if st.checkbox("Completado", value=is_completed, key=f"check_{day_id}"):
+                            if not is_completed:
+                                # Pop-over de nota
+                                with st.expander("📝 Añadir nota de aprendizaje (opcional)", expanded=True):
+                                    note = st.text_area("¿Qué aprendiste hoy?", key=f"note_{day_id}")
+                                    if st.button("Guardar Tarea", key=f"btn_{day_id}"):
+                                        st.session_state.completed_days_v2[day_id] = {
+                                            "note": note,
+                                            "date": datetime.now().strftime("%Y-%m-%d %H:%M")
+                                        }
+                                        save_progress(st.session_state.completed_days_v2)
+                                        st.rerun()
+                        else:
+                            if is_completed:
+                                del st.session_state.completed_days_v2[day_id]
+                                save_progress(st.session_state.completed_days_v2)
+                                st.rerun()
 
 st.markdown(f"""
 <div style="margin-top: 4rem; border-top: 1px solid {divider_color}; padding-top: 2rem; text-align: center; color: {secondary_text}; font-size: 0.7rem;">
